@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Altınvadi Konakları</title>
+    <link rel="shortcut icon" href="img/logom.png" type="image/x-icon" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/animate.css" />
+    <link rel="stylesheet" href="css/owl.carousel.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+      }
+      .container {
+        margin-top: 120px;
+      }
+      .tab {
+        overflow: hidden;
+        border-bottom: 1px solid #ccc;
+        background-color: #58ad5e;
+      }
+
+      .tab button {
+        color: white;
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      .tab button:hover {
+        background-color: #ddd;
+      }
+
+      .tab button.active {
+        background-color: #000000;
+      }
+
+      .tabcontent {
+        display: none;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-top: none;
+        border-radius: 0 0 10px 10px;
+      }
+      .header {
+        text-align: center;
+        padding: 20px 0;
+        background-color: #58ad5e;
+        margin-bottom: 20px;
+        border-radius: 10px;
+      }
+      .header h1 {
+        margin: 0;
+        font-size: 36px;
+        color: white;
+      }
+      .content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        border-radius: 0;
+        background-color: #f9f9f9;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .info-container {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+      .info-box {
+        text-align: center;
+        flex: 1;
+        min-width: 280px;
+        margin: 10px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .info-box h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #58ad5e;
+      }
+      .info-box ul {
+        list-style: none;
+        padding-left: 0;
+      }
+      .info-box li {
+        margin: 10px 0;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+      }
+      .info-box li i {
+        color: #58ad5e;
+        margin-right: 10px;
+      }
+      .gallery-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 20px;
+        margin-top: 20px;
+      }
+      .gallery-item {
+        flex-basis: calc(33.33% - 20px);
+        cursor: pointer;
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+        transition: transform 0.3s ease, filter 0.3s ease; /* Karartma efekti için geçiş efekti ekleniyor */
+      }
+
+      .gallery-item:hover img {
+        transform: scale(1.05); /* Resim büyüklüğünü artırmak için */
+        filter: brightness(0.5); /* Karartma efekti ekleniyor */
+      }
+      .gallery-item:hover {
+        transform: scale(1.05);
+      }
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 999;
+        padding-top: 50px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.9);
+      }
+      .modal-content {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 1200px;
+        max-height: 80%;
+      }
+      .modal-content img {
+        width: 100%;
+        height: auto;
+      }
+      .close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #fff;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+        cursor: pointer;
+      }
+      .close:hover,
+      .close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .prev,
+      .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        width: auto;
+        padding: 16px;
+        margin-top: -50px;
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        transition: 0.6s ease;
+        border-radius: 0 3px 3px 0;
+        user-select: none;
+        background-color: rgba(0, 0, 0, 0.8);
+        text-decoration: none;
+      }
+      .next {
+        right: 0;
+        border-radius: 3px 0 0 3px;
+      }
+      .prev:hover,
+      .next:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+      }
+      .footer {
+        color: white;
+        padding: 20px 0;
+        text-align: center;
+      }
+      .footer a {
+        color: #58ad5e;
+        text-decoration: none;
+      }
+      .footer a:hover {
+        text-decoration: underline;
+      }
+      .social-icons a {
+        color: #58ad5e;
+        margin: 0 10px;
+        font-size: 20px;
+      }
+      .social-icons a:hover {
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header-area">
+      <a href="home.html" class="logo-area">
+        <img style="height: 50px" src="img/zlogo.png" alt="" />
+      </a>
+      <div class="nav-switch">
+        <i class="fa fa-bars"></i>
+      </div>
+      <div class="phone-number">0262 343 44 41</div>
+      <nav class="nav-menu">
+        <ul>
+          <li class="active"><a href="index.html">Anasayfa</a></li>
+          <li><a href="about.html">Hakkımızda</a></li>
+          <li><a href="portfolio.html">Projelerimiz</a></li>
+          <li><a href="contact.html">İletişim</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div id="preloder">
+      <div class="loader"></div>
+    </div>
+
+    <header class="header-area"></header>
+
+    <main>
+      <div class="container">
+        <div class="header">
+          <h1>Altın Vadi Konakları</h1>
+        </div>
+        <div class=>
+          
+          <p style=" font-size:25px;">Kocaeli’nin incisi ve 7 yıldızlı ilçesi Başiskele'de konumlanan Altın Vadi Evleri, sizleri daha güzel bir yaşama davet ediyor. Bu prestijli proje, modern yaşamın konforunu doğayla iç içe bir ortamda sunarak, her gününüzü özel kılacak detaylarla doludur.</p>
+        <p></p>
+        </div>
+
+        <div class="tab">
+          <button class="tablinks" onclick="openTab(event, 'DışMekan')">
+            Dış Mekan Resimleri
+          </button>
+          <button class="tablinks" onclick="openTab(event, 'İçMekan')">
+            İç Mekan Resimleri
+          </button>
+          <button class="tablinks" onclick="openTab(event, 'KatPlanı')">
+            Kat Planı
+          </button>
+         
+          <button onclick="window.location.href = 'zekiogullari-altinvadi-ekatalog.pdf';">
+            Katalog
+        </button>
+        </div>
+
+        <div id="DışMekan" class="tabcontent">
+          
+          <div class="content">
+            
+            <div class="gallery-container">
+              <div class="gallery-item" onclick="openModal('DışMekanModal', 1)">
+                <img src="img/altinvadi/1.jpg" alt="Resim 1" />
+              </div>
+              <div class="gallery-item" onclick="openModal('DışMekanModal', 2)">
+                <img src="img/altinvadi/2.jpg" alt="Resim 2" />
+              </div>
+              <div class="gallery-item" onclick="openModal('DışMekanModal', 3)">
+                <img src="img/altinvadi/3.jpg" alt="Resim 3" />
+              </div>
+              <div class="gallery-item" onclick="openModal('DışMekanModal', 4)">
+                <img src="img/altinvadi/4.jpg" alt="Resim 4" />
+              </div>
+              <div class="gallery-item" onclick="openModal('DışMekanModal', 5)">
+                <img src="img/altinvadi/5.jpg" alt="Resim 5" />
+              </div>
+              <div class="gallery-item" onclick="openModal('DışMekanModal', 6)">
+                <img src="img/altinvadi/6.jpg" alt="Resim 6" />
+              </div>
+              <div class="gallery-item" onclick="openModal('DışMekanModal', 71)">
+                <img src="img/altinvadi/7.jpg" alt="Resim 7" />
+              </div>
+              <div class="gallery-item" onclick="openModal('DışMekanModal', 8)">
+                <img src="img/altinvadi/8.jpg" alt="Resim 8" />
+              </div>
+             
+            </div>
+            <div class="info-container">
+              <div class="info-box project-details">
+                <h2>Proje Detayları</h2>
+                <ul>
+                  <li><i class="fas fa-tree"></i> Doğayla İç İçe</li>
+                  <li><i class="fas fa-city"></i> Deniz ve şehir Manzaralı</li>
+                  <li><i class="fas fa-parking"></i> Kapalı ve Açık Otopark</li>
+                  <li>
+                    <i class="fas fa-dumbbell"></i> Bay ve Bayan FİTNESS
+                    Salonları
+                  </li>
+                  
+                  <li><i class="fas fa-coffee"></i> Kafeterya</li>
+                  <li><i class="fas fa-elevator"></i> Asansörlü</li>
+                  <li><i class="fas fa-home"></i> 1+1 , 2+1 , ve 3+1</li>
+                  <li>
+                    <i class="fas fa-building"></i> Bahçe dublex , Çatı dublex
+                    ve Ara Kat seçenekleri ile
+                  </li>
+                  
+                </ul>
+              </div>
+              <div class="info-box contact-info">
+                <h2>İletişim Bilgileri</h2>
+                <ul>
+                  <li>
+                    <i class="fas fa-map-marker-alt"></i> Kocaeli, Başiskele
+                  </li>
+                  <li><i class="fas fa-envelope"></i> info@zekiogullari.com</li>
+                  <li><i class="fas fa-phone"></i> 0262 343 44 41 </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="İçMekan" class="tabcontent">
+          <div class="content">
+            <div class="gallery-container">
+              <div class="gallery-item" onclick="openModal('İçMekanModal', 1)">
+                <img src="img/altinvadi/içmekan/9.jpg" alt="Resim 9" />
+              </div>
+              <div class="gallery-item" onclick="openModal('İçMekanModal', 2)">
+                <img src="img/altinvadi/içmekan/10.jpg" alt="Resim 10" />
+              </div>
+              <div class="gallery-item" onclick="openModal('İçMekanModal', 3)">
+                <img src="img/altinvadi/içmekan/11.jpg" alt="Resim 11" />
+              </div>
+              <div class="gallery-item" onclick="openModal('İçMekanModal', 4)">
+                <img src="img/altinvadi/içmekan/12.jpg" alt="Resim 12" />
+              </div>
+              <div class="gallery-item" onclick="openModal('İçMekanModal', 5)">
+                <img src="img/altinvadi/içmekan/13.jpg" alt="Resim 13" />
+              </div>
+              <div class="gallery-item" onclick="openModal('İçMekanModal', 6)">
+                <img src="img/altinvadi/içmekan/14.jpg" alt="Resim 14" />
+              </div>
+              <div class="gallery-item" onclick="openModal('İçMekanModal', 7)">
+                <img src="img/altinvadi/içmekan/15.jpg" alt="Resim 15" />
+              </div>
+              <div class="gallery-item" onclick="openModal('İçMekanModal', 8)">
+                <img src="img/altinvadi/içmekan/16.jpg" alt="Resim 16" />
+              </div>
+              <div class="gallery-item" onclick="openModal('İçMekanModal', 9)">
+                <img src="img/altinvadi/içmekan/17.jpg" alt="Resim 17" />
+              </div>
+              <div class="gallery-item" onclick="openModal('İçMekanModal', 10)">
+                <img src="img/altinvadi/içmekan/18.jpg" alt="Resim 18" />
+              </div>
+              <div class="gallery-item" onclick="openModal('İçMekanModal', 11)">
+                <img src="img/altinvadi/içmekan/19.jpg" alt="Resim 19" />
+              </div>
+              <div class="gallery-item" onclick="openModal('İçMekanModal', 12)">
+                <img src="img/altinvadi/içmekan/20.jpg" alt="Resim 20" />
+              </div>
+              <div class="gallery-item" onclick="openModal('İçMekanModal', 13)">
+                <img src="img/altinvadi/içmekan/21.jpg" alt="Resim 21" />
+              </div>
+              
+             
+            </div>
+          </div>
+        </div>
+
+        <div id="KatPlanı" class="tabcontent">
+          <div class="content">
+            <div class="gallery-container">
+              <div class="gallery-item" onclick="openModal('KatPlanıModal', 1)">
+                <img src="img/altinvadi/katplan/23.jpg" alt="Resim 23" />
+              </div>
+              <div class="gallery-item" onclick="openModal('KatPlanıModal', 2)">
+                <img src="img/altinvadi/katplan/24.jpg" alt="Resim 24" />
+              </div>
+              <div class="gallery-item" onclick="openModal('KatPlanıModal', 3)">
+                <img src="img/altinvadi/katplan/25.jpg" alt="Resim 25" />
+              </div>
+              <div class="gallery-item" onclick="openModal('KatPlanıModal', 4)">
+                <img src="img/altinvadi/katplan/26.jpg" alt="Resim 26" />
+              </div>
+              <div class="gallery-item" onclick="openModal('KatPlanıModal', 5)">
+                <img src="img/altinvadi/katplan/27.jpg" alt="Resim 27" />
+              </div>
+              <div class="gallery-item" onclick="openModal('KatPlanıModal', 6)">
+                <img src="img/altinvadi/katplan/28.jpg" alt="Resim 28" />
+              </div>
+              <div class="gallery-item" onclick="openModal('KatPlanıModal', 7)">
+                <img src="img/altinvadi/katplan/29.jpg" alt="Resim 29" />
+              </div>
+              <div class="gallery-item" onclick="openModal('KatPlanıModal', 8)">
+                <img src="img/altinvadi/katplan/30.jpg" alt="Resim 30" />
+              </div>
+              <div class="gallery-item" onclick="openModal('KatPlanıModal', 9)">
+                <img src="img/altinvadi/katplan/31.jpg" alt="Resim 31" />
+              </div>
+              <div class="gallery-item" onclick="openModal('KatPlanıModal', 10)">
+                <img src="img/altinvadi/katplan/32.jpg" alt="Resim 32" />
+              </div>
+              <div class="gallery-item" onclick="openModal('KatPlanıModal', 11)">
+                <img src="img/altinvadi/katplan/33.jpg" alt="Resim 44" />
+              </div>
+              <div class="gallery-item" onclick="openModal('KatPlanıModal', 12)">
+                <img src="img/altinvadi/katplan/34.jpg" alt="Resim 34" />
+              </div>
+              <div class="gallery-item" onclick="openModal('KatPlanıModal', 13)">
+                <img src="img/altinvadi/katplan/35.jpg" alt="Resim 35" />
+              </div>
+              <div class="gallery-item" onclick="openModal('KatPlanıModal', 14)">
+                <img src="img/altinvadi/katplan/36.jpg" alt="Resim 36" />
+              </div>
+              <div class="gallery-item" onclick="openModal('KatPlanıModal', 15)">
+                <img src="img/altinvadi/katplan/37.jpg" alt="Resim 37" />
+              </div>
+             
+            </div>
+          </div>
+        </div>
+
+        
+
+        <div id="Katalog" class="tabcontent">
+          <h2>Katalog</h2>
+          <p>Katalog içeriği buraya gelecek...</p>
+        </div>
+
+        <div id="DışMekanModal" class="modal">
+          <span class="close cursor" onclick="closeModal('DışMekanModal')">&times;</span>
+          <div class="modal-content">
+            <div class="mySlides DışMekanModal">
+              <img src="img/altinvadi/1.jpg" style="width: 100%" />
+            </div>
+            <div class="mySlides DışMekanModal">
+              <img src="img/altinvadi/2.jpg" style="width: 100%" />
+            </div>
+            <div class="mySlides DışMekanModal">
+              <img src="img/altinvadi/3.jpg" style="width: 100%" />
+            </div>
+            <div class="mySlides DışMekanModal">
+              <img src="img/altinvadi/4.jpg" style="width: 100%" />
+            </div>
+            <div class="mySlides DışMekanModal">
+              <img src="img/altinvadi/5.jpg" style="width: 100%" />
+            </div>
+            <div class="mySlides DışMekanModal">
+              <img src="img/altinvadi/6.jpg" style="width: 100%" />
+            </div>
+            <div class="mySlides DışMekanModal">
+              <img src="img/altinvadi/7.jpg" style="width: 100%" />
+            </div>
+            <div class="mySlides DışMekanModal">
+              <img src="img/altinvadi/8.jpg" style="width: 100%" />
+            </div>
+            <!-- Add more slides as needed -->
+            <a class="prev" onclick="plusSlides(-1, 'DışMekanModal')">&#10094;</a>
+            <a class="next" onclick="plusSlides(1, 'DışMekanModal')">&#10095;</a>
+          </div>
+        </div>
+        <div id="İçMekanModal" class="modal">
+          <span class="close cursor" onclick="closeModal('İçMekanModal')">&times;</span>
+          <div class="modal-content">
+            <div class="mySlides İçMekanModal">
+              <img src="img/altinvadi/içmekan/9.jpg" style="width: 100%" />
+            </div>
+            <div class="mySlides İçMekanModal">
+              <img src="img/altinvadi/içmekan/10.jpg" style="width: 100%" />
+            </div>
+            <div class="mySlides İçMekanModal">
+              <img src="img/altinvadi/içmekan/11.jpg" style="width: 100%" />
+            </div>
+            <div class="mySlides İçMekanModal">
+              <img src="img/altinvadi/içmekan/12.jpg" style="width: 100%" />
+            </div>
+            <div class="mySlides İçMekanModal">
+              <img src="img/altinvadi/içmekan/13.jpg" style="width: 100%" />
+            </div>
+            <div class="mySlides İçMekanModal">
+              <img src="img/altinvadi/içmekan/14.jpg" style="width: 100%" />
+            </div>
+            <div class="mySlides İçMekanModal">
+              <img src="img/altinvadi/içmekan/15.jpg" style="width: 100%" />
+            </div>
+            <div class="mySlides İçMekanModal">
+              <img src="img/altinvadi/içmekan/16.jpg" style="width: 100%" />
+            </div>
+            <div class="mySlides İçMekanModal">
+              <img src="img/altinvadi/içmekan/17.jpg" style="width: 100%" />
+            </div>
+            <div class="mySlides İçMekanModal">
+              <img src="img/altinvadi/içmekan/18.jpg" style="width: 100%" />
+            </div>
+            <div class="mySlides İçMekanModal">
+              <img src="img/altinvadi/içmekan/19.jpg" style="width: 100%" />
+            </div>
+            <div class="mySlides İçMekanModal">
+              <img src="img/altinvadi/içmekan/20.jpg" style="width: 100%" />
+            </div>
+            <div class="mySlides İçMekanModal">
+              <img src="img/altinvadi/içmekan/21.jpg" style="width: 100%" />
+            </div>
+            <a class="prev" onclick="plusSlides(-1, 'İçMekanModal')">&#10094;</a>
+            <a class="next" onclick="plusSlides(1, 'İçMekanModal')">&#10095;</a>
+          </div>
+        </div>
+        <div id="KatPlanıModal" class="modal">
+          <span class="close cursor" onclick="closeModal('KatPlanıModal')">&times;</span>
+          <div class="modal-content">
+            <div class="mySlides KatPlanıModal">
+              <img src="img/altinvadi/katplan/23.jpg" style="width: 100%" />
+            </div>
+            <div class="mySlides KatPlanıModal">
+              <img src="img/altinvadi/katplan/24.jpg" style="width: 100%" />
+            </div>
+            <div class="mySlides KatPlanıModal">
+              <img src="img/altinvadi/katplan/25.jpg" style="width: 100%" />
+            </div>
+            <div class="mySlides KatPlanıModal">
+              <img src="img/altinvadi/katplan/26.jpg" style="width: 100%" />
+            </div>
+            <div class="mySlides KatPlanıModal">
+              <img src="img/altinvadi/katplan/27.jpg" style="width: 100%" />
+            </div>
+            <div class="mySlides KatPlanıModal">
+              <img src="img/altinvadi/katplan/28.jpg" style="width: 100%" />
+            </div>
+            <div class="mySlides KatPlanıModal">
+              <img src="img/altinvadi/katplan/29.jpg" style="width: 100%" />
+            </div>
+            <div class="mySlides KatPlanıModal">
+              <img src="img/altinvadi/katplan/30.jpg" style="width: 100%" />
+            </div>
+            <div class="mySlides KatPlanıModal">
+              <img src="img/altinvadi/katplan/31.jpg" style="width: 100%" />
+            </div>
+            <div class="mySlides KatPlanıModal">
+              <img src="img/altinvadi/katplan/32.jpg" style="width: 100%" />
+            </div>
+            <div class="mySlides KatPlanıModal">
+              <img src="img/altinvadi/katplan/33.jpg" style="width: 100%" />
+            </div>
+            <div class="mySlides KatPlanıModal">
+              <img src="img/altinvadi/katplan/34.jpg" style="width: 100%" />
+            </div>
+            <div class="mySlides KatPlanıModal">
+              <img src="img/altinvadi/katplan/35.jpg" style="width: 100%" />
+            </div>
+            <div class="mySlides KatPlanıModal">
+              <img src="img/altinvadi/katplan/36.jpg" style="width: 100%" />
+            </div>
+            <div class="mySlides KatPlanıModal">
+              <img src="img/altinvadi/katplan/37.jpg" style="width: 100%" />
+            </div>
+            
+            <a class="prev" onclick="plusSlides(-1, 'KatPlanıModal')">&#10094;</a>
+            <a class="next" onclick="plusSlides(1, 'KatPlanıModal')">&#10095;</a>
+          </div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-content">
+          <p>
+            &copy; 2024 Tüm Hakları Saklıdır. <br />
+            <a href="">Zekioğulları İnşaat</a>
+          </p>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+      <a
+        href="https://wa.me/900000000000"
+        class="whatsapp-float"
+        target="_blank"
+      >
+        <i class="fab fa-whatsapp"></i>
+      </a>
+    </footer>
+
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/isotope.pkgd.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.owl-filter.js"></script>
+    <script src="js/magnific-popup.min.js"></script>
+    <script src="js/circle-progress.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+      function openTabAndDownloadPDF(evt, tabName, pdfURL) {
+        // Belirtilen sekme açılır
+        openTab(evt, tabName);
+        
+        // PDF dosyasını indirme işlemi
+        var link = document.createElement('a');
+        link.href = pdfURL;
+        link.download = 'ka ';
+        link.click();
+      }
+      </script>
+    <script>
+      
+      function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+      }
+
+      function openModal(modalId, slideIndex) {
+  document.getElementById(modalId).style.display = "block";
+  currentSlide(slideIndex, modalId);
+}
+
+function closeModal(modalId) {
+  document.getElementById(modalId).style.display = "none";
+}
+
+var slideIndex = {};
+
+function currentSlide(n, modalId) {
+  slideIndex[modalId] = n;
+  showSlides(n, modalId);
+}
+
+function plusSlides(n, modalId) {
+  showSlides(slideIndex[modalId] += n, modalId);
+}
+
+function showSlides(n, modalId) {
+  var i;
+  var slides = document.getElementsByClassName(modalId);
+  if (n > slides.length) {
+    slideIndex[modalId] = 1;
+  }
+  if (n < 1) {
+    slideIndex[modalId] = slides.length;
+  }
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  slides[slideIndex[modalId] - 1].style.display = "block";
+}
+
+// Initialization
+document.querySelectorAll('.modal').forEach(modal => {
+  const modalId = modal.id;
+  slideIndex[modalId] = 1;
+  showSlides(1, modalId);
+});
+
+      // İlk tabı açık göster
+      document.getElementsByClassName("tablinks")[0].click();
+    </script>
+  </body>
+</html>

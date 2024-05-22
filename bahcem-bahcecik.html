@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bahçem Bahçecik</title>
+    <link rel="shortcut icon" href="img/logom.png" type="image/x-icon" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/animate.css" />
+    <link rel="stylesheet" href="css/owl.carousel.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      
+      body {
+        font-family: "Roboto", sans-serif;
+      }
+      .container {
+        margin-top: 120px;
+      }
+      .tab {
+        overflow: hidden;
+        border-bottom: 1px solid #ccc;
+        background-color: #58ad5e;
+      }
+
+      .tab button {
+        color: white;
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      .tab button:hover {
+        background-color: #ddd;
+      }
+
+      .tab button.active {
+        background-color: #000000;
+      }
+
+      .tabcontent {
+        display: none;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-top: none;
+        border-radius: 0 0 10px 10px;
+      }
+      .header {
+        text-align: center;
+        padding: 20px 0;
+        background-color: #58ad5e;
+        margin-bottom: 20px;
+        border-radius: 10px;
+      }
+      .header h1 {
+        margin: 0;
+        font-size: 36px;
+        color: white;
+      }
+      .content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        border-radius: 0;
+        background-color: #f9f9f9;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .info-container {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+      .info-box {
+        text-align: center;
+        flex: 1;
+        min-width: 280px;
+        margin: 10px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .info-box h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #58ad5e;
+      }
+      .info-box ul {
+        list-style: none;
+        padding-left: 0;
+      }
+      .info-box li {
+        margin: 10px 0;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+      }
+      .info-box li i {
+        color: #58ad5e;
+        margin-right: 10px;
+      }
+      .gallery-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 20px;
+        margin-top: 20px;
+      }
+      .gallery-item {
+        flex-basis: calc(33.33% - 20px);
+        cursor: pointer;
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+        transition: transform 0.3s ease, filter 0.3s ease; /* Karartma efekti için geçiş efekti ekleniyor */
+      }
+
+      .gallery-item:hover img {
+        transform: scale(1.05); /* Resim büyüklüğünü artırmak için */
+        filter: brightness(0.5); /* Karartma efekti ekleniyor */
+      }
+      .gallery-item:hover {
+        transform: scale(1.05);
+      }
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 999;
+        padding-top: 50px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.9);
+      }
+      .modal-content {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 1200px;
+        max-height: 80%;
+      }
+      .modal-content img {
+        width: 100%;
+        height: auto;
+      }
+      .close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #fff;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+        cursor: pointer;
+      }
+      .close:hover,
+      .close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .prev,
+      .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        width: auto;
+        padding: 16px;
+        margin-top: -50px;
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        transition: 0.6s ease;
+        border-radius: 0 3px 3px 0;
+        user-select: none;
+        background-color: rgba(0, 0, 0, 0.8);
+        text-decoration: none;
+      }
+      .next {
+        right: 0;
+        border-radius: 3px 0 0 3px;
+      }
+      .prev:hover,
+      .next:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+      }
+      .footer {
+        color: white;
+        padding: 20px 0;
+        text-align: center;
+      }
+      .footer a {
+        color: #58ad5e;
+        text-decoration: none;
+      }
+      .footer a:hover {
+        text-decoration: underline;
+      }
+      .social-icons a {
+        color: #58ad5e;
+        margin: 0 10px;
+        font-size: 20px;
+      }
+      .social-icons a:hover {
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header-area">
+      <a href="home.html" class="logo-area">
+        <img style="height: 50px" src="img/zlogo.png" alt="" />
+      </a>
+      <div class="nav-switch">
+        <i class="fa fa-bars"></i>
+      </div>
+      <div class="phone-number">0262 343 44 41</div>
+      <nav class="nav-menu">
+        <ul>
+          <li class="active"><a href="index.html">Anasayfa</a></li>
+          <li><a href="about.html">Hakkımızda</a></li>
+          <li><a href="portfolio.html">Projelerimiz</a></li>
+          <li><a href="contact.html">İletişim</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div id="preloder">
+      <div class="loader"></div>
+    </div>
+
+    <header class="header-area"></header>
+
+    <main>
+      <div class="container">
+        <div class="header">
+          <h1>Bahçem Bahçecik</h1>
+        </div>
+        <div class=>
+
+        <p style="font-size: 25px">
+          Bahçem Bahçecik, Başiskele'nin gözde bölgesinde sizleri ağırlıyor. Bu
+          özel villa projesi, doğayla iç içe modern yaşamın kapılarını aralıyor.
+        </p>
+        <p></p>
+      </div>
+
+      <div id="DışMekan" class="">
+        <div class="content">
+          <div class="gallery-container">
+            <div class="gallery-item" onclick="openModal('DışMekanModal', 1)">
+              <img src="img/bahcem-bahcecik/1.webp" alt="Resim 1" />
+            </div>
+
+            <div class="gallery-item" onclick="openModal('DışMekanModal', 2)">
+              <img src="img/bahcem-bahcecik/2.webp" alt="Resim 2" />
+            </div>
+
+            <div class="gallery-item" onclick="openModal('DışMekanModal', 3)">
+              <img src="img/bahcem-bahcecik/3.webp" alt="Resim 3" />
+            </div>
+
+            <div class="gallery-item" onclick="openModal('DışMekanModal', 4)">
+              <img src="img/bahcem-bahcecik/4.webp" alt="Resim 4" />
+            </div>
+
+            <div class="gallery-item" onclick="openModal('DışMekanModal', 5)">
+              <img src="img/bahcem-bahcecik/5.webp" alt="Resim 5" />
+            </div>
+
+            <div class="gallery-item" onclick="openModal('DışMekanModal', 6)">
+              <img src="img/bahcem-bahcecik/6.webp" alt="Resim 6" />
+            </div>
+
+            <div class="gallery-item" onclick="openModal('DışMekanModal', 7)">
+              <img src="img/bahcem-bahcecik/7.webp" alt="Resim 7" />
+            </div>
+
+            <div class="gallery-item" onclick="openModal('DışMekanModal', 8)">
+              <img src="img/bahcem-bahcecik/8.webp" alt="Resim 8" />
+            </div>
+
+            <div class="gallery-item" onclick="openModal('DışMekanModal', 9)">
+              <img src="img/bahcem-bahcecik/9.webp" alt="Resim 9" />
+            </div>
+
+            <div class="gallery-item" onclick="openModal('DışMekanModal', 10)">
+              <img src="img/bahcem-bahcecik/10.webp" alt="Resim 10" />
+            </div>
+            <div class="gallery-item" onclick="openModal('DışMekanModal', 11)">
+              <img src="img/bahcem-bahcecik/11.webp" alt="Resim 11" />
+            </div>
+
+            <div class="gallery-item" onclick="openModal('DışMekanModal', 12)">
+              <img src="img/bahcem-bahcecik/12.webp" alt="Resim 12" />
+            </div>
+
+            <div class="gallery-item" onclick="openModal('DışMekanModal', 13)">
+              <img src="img/bahcem-bahcecik/13.webp" alt="Resim 13" />
+            </div>
+
+            <div class="gallery-item" onclick="openModal('DışMekanModal', 14)">
+              <img src="img/bahcem-bahcecik/14.webp" alt="Resim 14" />
+            </div>
+
+            <div class="gallery-item" onclick="openModal('DışMekanModal', 15)">
+              <img src="img/bahcem-bahcecik/15.webp" alt="Resim 15" />
+            </div>
+
+            <div class="gallery-item" onclick="openModal('DışMekanModal', 16)">
+              <img src="img/bahcem-bahcecik/16.webp" alt="Resim 16" />
+            </div>
+
+            <div class="gallery-item" onclick="openModal('DışMekanModal', 17)">
+              <img src="img/bahcem-bahcecik/17.webp" alt="Resim 17" />
+            </div>
+
+            <div class="gallery-item" onclick="openModal('DışMekanModal', 18)">
+              <img src="img/bahcem-bahcecik/18.webp" alt="Resim 18" />
+            </div>
+
+            <div class="gallery-item" onclick="openModal('DışMekanModal', 19)">
+              <img src="img/bahcem-bahcecik/19.webp" alt="Resim 19" />
+            </div>
+
+            <div class="gallery-item" onclick="openModal('DışMekanModal', 20)">
+              <img src="img/bahcem-bahcecik/20.webp" alt="Resim 20" />
+            </div>
+
+            <div class="gallery-item" onclick="openModal('DışMekanModal', 21)">
+              <img src="img/bahcem-bahcecik/21.webp" alt="Resim 21" />
+            </div>
+
+            <div class="gallery-item" onclick="openModal('DışMekanModal', 22)">
+              <img src="img/bahcem-bahcecik/22.webp" alt="Resim 22" />
+            </div>
+
+            <div class="gallery-item" onclick="openModal('DışMekanModal', 24)">
+              <img src="img/bahcem-bahcecik/24.webp" alt="Resim 24" />
+            </div>
+
+            <div class="gallery-item" onclick="openModal('DışMekanModal', 25)">
+              <img src="img/bahcem-bahcecik/25.webp" alt="Resim 25" />
+            </div>
+
+            <div class="gallery-item" onclick="openModal('DışMekanModal', 26)">
+              <img src="img/bahcem-bahcecik/26.webp" alt="Resim 26" />
+            </div>
+
+            <div class="gallery-item" onclick="openModal('DışMekanModal', 27)">
+              <img src="img/bahcem-bahcecik/27.webp" alt="Resim 27" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="DışMekanModal" class="modal">
+        <span class="close cursor" onclick="closeModal('DışMekanModal')"
+          >&times;</span
+        >
+        <div class="modal-content">
+          <div class="mySlides DışMekanModal">
+            <img src="img/bahcem-bahcecik/1.webp" style="width: 100%" />
+          </div>
+          <div class="mySlides DışMekanModal">
+            <img src="img/bahcem-bahcecik/2.webp" style="width: 100%" />
+          </div>
+          <div class="mySlides DışMekanModal">
+            <img src="img/bahcem-bahcecik/3.webp" style="width: 100%" />
+          </div>
+          <div class="mySlides DışMekanModal">
+            <img src="img/bahcem-bahcecik/4.webp" style="width: 100%" />
+          </div>
+          <div class="mySlides DışMekanModal">
+            <img src="img/bahcem-bahcecik/5.webp" style="width: 100%" />
+          </div>
+          <div class="mySlides DışMekanModal">
+            <img src="img/bahcem-bahcecik/6.webp" style="width: 100%" />
+          </div>
+          <div class="mySlides DışMekanModal">
+            <img src="img/bahcem-bahcecik/7.webp" style="width: 100%" />
+          </div>
+          <div class="mySlides DışMekanModal">
+            <img src="img/bahcem-bahcecik/8.webp" style="width: 100%" />
+          </div>
+          <div class="mySlides DışMekanModal">
+            <img src="img/bahcem-bahcecik/9.webp" style="width: 100%" />
+          </div>
+          <div class="mySlides DışMekanModal">
+            <img src="img/bahcem-bahcecik/10.webp" style="width: 100%" />
+          </div>
+          <div class="mySlides DışMekanModal">
+            <img src="img/bahcem-bahcecik/11.webp" style="width: 100%" />
+          </div>
+          <div class="mySlides DışMekanModal">
+            <img src="img/bahcem-bahcecik/12.webp" style="width: 100%" />
+          </div>
+          <div class="mySlides DışMekanModal">
+            <img src="img/bahcem-bahcecik/13.webp" style="width: 100%" />
+          </div>
+          <div class="mySlides DışMekanModal">
+            <img src="img/bahcem-bahcecik/14.webp" style="width: 100%" />
+          </div>
+          <div class="mySlides DışMekanModal">
+            <img src="img/bahcem-bahcecik/15.webp" style="width: 100%" />
+          </div>
+          <div class="mySlides DışMekanModal">
+            <img src="img/bahcem-bahcecik/16.webp" style="width: 100%" />
+          </div>
+          <div class="mySlides DışMekanModal">
+            <img src="img/bahcem-bahcecik/17.webp" style="width: 100%" />
+          </div>
+          <div class="mySlides DışMekanModal">
+            <img src="img/bahcem-bahcecik/18.webp" style="width: 100%" />
+          </div>
+          <div class="mySlides DışMekanModal">
+            <img src="img/bahcem-bahcecik/19.webp" style="width: 100%" />
+          </div>
+          <div class="mySlides DışMekanModal">
+            <img src="img/bahcem-bahcecik/20.webp" style="width: 100%" />
+          </div>
+          <div class="mySlides DışMekanModal">
+            <img src="img/bahcem-bahcecik/21.webp" style="width: 100%" />
+          </div>
+          <div class="mySlides DışMekanModal">
+            <img src="img/bahcem-bahcecik/22.webp" style="width: 100%" />
+          </div>
+          <div class="mySlides DışMekanModal">
+            <img src="img/bahcem-bahcecik/1.webp" style="width: 100%" />
+          </div>
+          <div class="mySlides DışMekanModal">
+            <img src="img/bahcem-bahcecik/23.webp" style="width: 100%" />
+          </div>
+          <div class="mySlides DışMekanModal">
+            <img src="img/bahcem-bahcecik/24.webp" style="width: 100%" />
+          </div>
+          <div class="mySlides DışMekanModal">
+            <img src="img/bahcem-bahcecik/25.webp" style="width: 100%" />
+          </div>
+
+          <a class="prev" onclick="plusSlides(-1, 'DışMekanModal')">&#10094;</a>
+          <a class="next" onclick="plusSlides(1, 'DışMekanModal')">&#10095;</a>
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-content">
+          <p>
+            &copy; 2024 Tüm Hakları Saklıdır. <br />
+            <a href="">Zekioğulları İnşaat</a>
+          </p>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+      <a
+        href="https://wa.me/900000000000"
+        class="whatsapp-float"
+        target="_blank"
+      >
+        <i class="fab fa-whatsapp"></i>
+      </a>
+    </footer>
+
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/isotope.pkgd.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.owl-filter.js"></script>
+    <script src="js/magnific-popup.min.js"></script>
+    <script src="js/circle-progress.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+      function openTabAndDownloadPDF(evt, tabName, pdfURL) {
+        // Belirtilen sekme açılır
+        openTab(evt, tabName);
+
+        // PDF dosyasını indirme işlemi
+        var link = document.createElement("a");
+        link.href = pdfURL;
+        link.download = "ka ";
+        link.click();
+      }
+    </script>
+    <script>
+      function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+      }
+
+      function openModal(modalId, slideIndex) {
+        document.getElementById(modalId).style.display = "block";
+        currentSlide(slideIndex, modalId);
+      }
+
+      function closeModal(modalId) {
+        document.getElementById(modalId).style.display = "none";
+      }
+
+      var slideIndex = {};
+
+      function currentSlide(n, modalId) {
+        slideIndex[modalId] = n;
+        showSlides(n, modalId);
+      }
+
+      function plusSlides(n, modalId) {
+        showSlides((slideIndex[modalId] += n), modalId);
+      }
+
+      function showSlides(n, modalId) {
+        var i;
+        var slides = document.getElementsByClassName(modalId);
+        if (n > slides.length) {
+          slideIndex[modalId] = 1;
+        }
+        if (n < 1) {
+          slideIndex[modalId] = slides.length;
+        }
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
+        slides[slideIndex[modalId] - 1].style.display = "block";
+      }
+
+      // Initialization
+      document.querySelectorAll(".modal").forEach((modal) => {
+        const modalId = modal.id;
+        slideIndex[modalId] = 1;
+        showSlides(1, modalId);
+      });
+
+      // İlk tabı açık göster
+      document.getElementsByClassName("tablinks")[0].click();
+    </script>
+  </body>
+</html>
