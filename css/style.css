@@ -85,6 +85,7 @@ p {
 }
 
 img {
+
 	max-width: 100%;
 }
 
@@ -148,9 +149,54 @@ ol {
 }
 
 .section-title {
+	
 	margin-bottom: 75px;
 }
+.section-title2{
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}	
+.section-title2 h2{
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
 
+}
+/* Animation keyframes */
+@keyframes slideInLeft {
+	from {
+	  transform: translateX(-100%);
+	  opacity: 0;
+	}
+	to {
+	  transform: translateX(0);
+	  opacity: 1;
+	}
+  }
+  
+  /* Initially hide the element and set it for animation */
+  .hidden {
+	opacity: 0;
+	transform: translateX(-100%);
+	transition: opacity 0.5s, transform 0.5s;
+  }
+  
+  /* When the element is visible in the viewport, apply the animation */
+  .visible {
+	animation: slideInLeft 0.5s forwards;
+  }
+.row2{
+	
+	
+	border-radius: 15px;
+	background-color: #53d45b;
+	display: flex;
+	justify-content: center;
+}
 .section-title h1,
 .section-title h2 {
 	border-radius:15px;
@@ -159,7 +205,7 @@ ol {
 	background: #53d45b;
 	padding: 0 20px;
 	margin-bottom: 0;
-	font-size: 60px;
+	
 	align-items: center;
 	justify-content: center;
 }
@@ -761,82 +807,58 @@ ol {
 /*----------------------------------------*/
 /*  Service Section CSS
 /*----------------------------------------*/
+.service-section {
+  padding: 60px 0;
+}
+
+.section-title h2 {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
 .service-box {
-	margin-bottom: 30px;
+  text-align: center;
 }
 
-.service-box .sb-icon {
-	
-	margin-bottom: 30px;
-	width: 100px;
-	height: 125px;
-	text-align: center;
-	position: relative;
-	overflow: hidden;
-	background-color: transparent;
-	-webkit-transition: all 0.4s;
-	-o-transition: all 0.4s;
-	transition: all 0.4s;
+.sb-icon {
+  margin-bottom: 30px;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #53d45b;
+  border-radius: 50%;
+  margin: 0 auto;
 }
 
-.service-box .sb-icon .sb-img-icon {
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	-webkit-transition: all 0.3s;
-	-o-transition: all 0.3s;
-	transition: all 0.3s;
+.sb-icon img {
+  max-width: 60px;
 }
 
-.service-box .sb-icon .sb-img-icon img {
-	opacity: 0.2;
-	max-height: 70px;
-	-webkit-transition: all 0.3s;
-	-o-transition: all 0.3s;
-	transition: all 0.3s;
+.sb-content {
+  background-color: #ffffff;
+  padding: 40px 20px;
+  border-radius: 10px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
 }
 
-.service-box .sb-icon::after {
-	content: "";
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	background: #fff;
-	left: 25px;
-	top: -80px;
-	-webkit-transform: rotate(-65deg);
-	    -ms-transform: rotate(-65deg);
-	        transform: rotate(-65deg);
+.sb-content h3 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
 }
 
-.service-box .readmore {
-	font-size: 12px;
-	font-weight: 700;
-	color: #222222;
-	display: inline-block;
-	padding: 2px 0;
-	background-color: transparent;
-	-webkit-transition: all 0.4s;
-	-o-transition: all 0.4s;
-	transition: all 0.4s;
+.sb-content p {
+  margin-bottom: 0;
+  font-size: 16px;
+  color: #666;
 }
 
-.service-box:hover .sb-icon {
-	background-color: #53d45b;
-}
-
-.service-box:hover .sb-icon .sb-img-icon {
-	left: 15px;
-	margin-bottom: 5px;
-}
-
-.service-box:hover .sb-icon .sb-img-icon img {
-	opacity: 1;
-}
-
-.service-box:hover .readmore {
-	background-color: #53d45b;
-	padding: 2px 10px;
+.service-box:hover .sb-content {
+  transform: translateY(-10px);
 }
 
 /*----------------------------------------*/
@@ -859,7 +881,7 @@ ol {
 }
 
 .cta-section .cta-image-box {
-	box-shadow: 30px 30px #58ad5e;
+	box-shadow: 30px 30px #53d45b;
 display: inline-flex; 
 	position: absolute;
 	width: 50%;
@@ -925,54 +947,94 @@ display: inline-flex;
 /*  Milestones Section CSS
 /*----------------------------------------*/
 .milestone {
-	
-	min-height: 110px;
-	padding-left: 43px;
-	padding-top: 15px;
-	position: relative;
+    border-radius: 10px;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    background: url('img/5.jpg') center center/cover no-repeat;
+    margin: 15px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    overflow: hidden;
+}
+
+.milestone:hover {
+    transform: translateY(-10px);
+}
+
+.milestone:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.milestone:hover:before {
+    opacity: 1;
+}
+
+.milestone-icon {
+    background: #222;
+    padding: 20px;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    z-index: 2;
+}
+
+.milestone-icon i {
+    font-size: 40px;
+    color: #53d45b;
 }
 
 .milestone h2 {
-
-	color: white;
-	margin-bottom: 0;
-	font-size: 68px;
-	display: inline-block;
-	float: left;
-	position: relative;
-	z-index: 1;
+    color: #53d45b;
+    margin-bottom: 10px;
+    font-size: 48px;
+    font-weight: 700;
+    z-index: 2;
 }
 
 .milestone p {
-	background-color: #00000091;
-	color: white;
-	float: left;
-	font-size: 20px;
-	margin-top: 10px;
-	margin-left: 10px;
-	line-height: 1.5;
-	position: relative;
-	z-index: 1;
-	font-weight: 500;
+	border-radius: 5px;
+	background-color: #0000008f;
+    color: #ffffff;
+    font-size: 22px;
+    margin-top: 15px;
+    line-height: 1.5;
+    font-weight: 400;
+    z-index: 2;
 }
 
 .milestone:after {
-	
-	position: absolute;
-	content: "";
-	width: 110px;
-	height: 110px;
-	left: 0;
-	top: 0;
-	background: #53d45b;
-	-webkit-transition: all 0.3s;
-	-o-transition: all 0.3s;
-	transition: all 0.3s;
+    position: absolute;
+    content: "";
+    width: 100px;
+    height: 100px;
+    left: 50%;
+    top: -20px;
+    transform: translateX(-50%);
+    background: #53d45b;
+    border-radius: 50%;
+    z-index: -1;
+    transition: background 0.3s;
 }
 
 .milestone:hover:after {
-	background: rgb(255, 3, 3);
+    background: #ff5722;
 }
+
+  
 
 /*----------------------------------------*/
 /*  Projects Section CSS
@@ -1095,16 +1157,15 @@ display: inline-flex;
 
 .projects-slider .owl-nav .owl-prev,
 .projects-slider .owl-nav .owl-next {
-	
-	display: inline-block;
+	display:none;
     font-size: 0;
     width: 50px;
     height: 50px;
     line-height: 50px;
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: transparent;
     border-radius: 50%;
-    color: #fff;
+    color: #58ad5e;
     position: fixed;
     top: 0;
 }
@@ -2129,25 +2190,42 @@ html, body {
         border-bottom: 1px solid #58ad5e; 
     }
     .hero-section {
-        background-color: red;
+		
+        background-color: white;
         height: auto;
     }
     .hero-slider .hero-slide-item {
+		
+		justify-content: center;
+		align-items: ce;
+		display: flex;
         padding: 150px 0;
         height: auto;
     }
+	.slide-content{
+		border-radius: 15px;
+		background-color: #1a721fd0;
+		margin-top: 200px;
+		
+	}
     .slide-content h2 {
+		text-align: center;
         font-size: 60px;
         line-height: 60px;
     }
+	.slide-content h3 {
+        font-size: 15px;
+        
+    }
     .hero-slider .owl-nav {
+		display: none;
         padding-left: 70px;
         width: 100%;
         text-align: center;
         left: 0;
     }
     .slide-content {
-        margin-left: 70px;
+        
         padding: 0;
         text-align: center;
     }
@@ -2229,6 +2307,15 @@ html, body {
 
 /* Small Mobile: up to 479px */
 @media only screen and (max-width: 479px) {
+	.hero-slider .hero-slide-item {
+        padding: 150px 0;
+        height: auto;
+    }
+	.hero-slide-item.set-bg {
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+	  }
     .cta-section {
         position: relative;
     }
@@ -2273,7 +2360,8 @@ html, body {
         padding-left: 0;
     }
     .slide-content {
-        margin-left: 0;
+
+       
         padding: 0 15px;
     }
     .slide-content h2 {
