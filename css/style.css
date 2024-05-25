@@ -760,7 +760,7 @@ ol {
 
 .slide-content {
     background-color: #00000090;
-    margin: 0 10%; /* Sağdan ve soldan yüzde 10'lik boşluklar */
+   
     margin-bottom: 50px;
     padding: 170px 50px 70px; /* Kenar boşlukları */
     position: relative;
@@ -768,7 +768,8 @@ ol {
     -webkit-transition: all 0.6s;
     -o-transition: all 0.6s;
     transition: all 0.6s;
-    max-width: 80%; /* Maksimum genişlik */
+	margin: 0 10%; /* Sağdan ve soldan yüzde 10'lik boşluklar */
+    max-width: 100%; /* Maksimum genişlik */
 }
 
 
@@ -788,6 +789,8 @@ ol {
 
 
 .slide-content h2 {
+	display: flex;
+	justify-content: center;
 	color: #fff;
 	font-size: 80px;
 	line-height: 80px;
@@ -2203,9 +2206,11 @@ html, body {
         height: auto;
     }
 	.slide-content{
+		margin: 0; /* Sağdan ve soldan yüzde 10'lik boşluklar */
+    max-width: 100%; /* Maksimum genişlik */
 		border-radius: 15px;
-		background-color: #1a721fd0;
-		margin-top: 200px;
+		background-color: #1a721eae;
+		
 		
 	}
     .slide-content h2 {
@@ -2226,8 +2231,7 @@ html, body {
     }
     .slide-content {
         
-        padding: 0;
-        text-align: center;
+       
     }
     .slide-num-holder,
     .slide-num-holder.test-slider {
@@ -2308,11 +2312,13 @@ html, body {
 /* Small Mobile: up to 479px */
 @media only screen and (max-width: 479px) {
 	.hero-slider .hero-slide-item {
+		margin-top: 100px;
         padding: 150px 0;
-        height: auto;
+        height: 250px;
     }
 	.hero-slide-item.set-bg {
-		background-size: cover;
+		
+		background-size:cover;
 		background-position: center;
 		background-repeat: no-repeat;
 	  }
@@ -2359,15 +2365,45 @@ html, body {
     .hero-slider .owl-nav {
         padding-left: 0;
     }
-    .slide-content {
-
-       
-        padding: 0 15px;
+    
+	.slide-content h3 {
+		
+		font-weight: 100;
+		margin-top: 5px;
+        font-size:10px
+        
     }
-    .slide-content h2 {
-        font-size: 35px;
-        line-height: 1.5;
-    }
+	.slide-content {
+		position: relative;
+		width: 100vw;  /* Tam ekran genişliği */
+		height: 100vh; /* Tam ekran yüksekliği */
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+		display: flex;
+		justify-content: center; /* Yatayda ortalama */
+		align-items: center;     /* Dikeyde ortalama */
+		background: linear-gradient(to right, #0808088a, #58ad5e2d); /* Yatay geçiş için lineer gradient */
+	}
+	
+	.overlay {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		background: rgba(0, 0, 0, 0.5); /* Yarı saydam siyah arka plan */
+		width: 100vw; /* Tam genişlik */
+		padding: 20px; /* İç boşluk */
+	}
+	
+	.slide-content h2 {
+		font-weight: 200;
+		font-size: 35px;
+		line-height: 1.5;
+		color: #ffffff; /* Beyaz renk */
+		text-align: center; /* Metni ortala */
+		margin: 0;
+	}
     .portfolio-warp .grid-item {
         width: 100%;
     }
