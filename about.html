@@ -18,18 +18,32 @@
     <link rel="stylesheet" href="css/style.css">
     <style>
         /* Custom CSS for new layout */
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
         .header-image {
             width: 100%;
             height: 50vh;
             background: url('img/1.png') no-repeat center center;
             background-size: cover;
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .header-image h1 {
+            font-size: 48px;
+            font-weight: 700;
         }
 
         .content-section {
             display: flex;
             align-items: center;
             padding: 50px 0;
+            flex-wrap: wrap;
         }
 
         .content-section:nth-child(even) {
@@ -39,6 +53,8 @@
         .content-text {
             flex: 1;
             padding: 20px;
+            font-size: 1.1em;
+            line-height: 1.6em;
         }
 
         .content-image {
@@ -50,9 +66,9 @@
             width: 100%;
             height: auto;
             border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Additional Styles */
         .footer-container {
             background-color: #1e1e1e;
             color: #fff;
@@ -74,6 +90,32 @@
         .social-icons a:hover {
             color: #007bff;
         }
+
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: white;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 100;
+        }
+
+        .whatsapp-float i {
+            margin-top: 16px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .content-section {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
@@ -91,111 +133,71 @@
                 <li><a href="index.html">Anasayfa</a></li>
                 <li class="active"><a href="about.html">Hakkımızda</a></li>
                 <li><a href="portfolio.html">Projelerimiz</a></li>
-                <li><a href="contact.html">İletişim</a></li>
+                <li><a href="#">İletişim</a></li>
             </ul>
         </nav>
     </header>
     <!-- Header section end -->
 
     <!-- Header image section start -->
-    <section class="header-image"></section>
+    <section class="header-image">
+        <h1 style="color: white;margin-top: 100px;">Hakkımızda</h1>
+    </section>
     <!-- Header image section end -->
 
     <!-- About section start -->
-    <section class="about-section spad pt100 pb50">
+    <section class="content-section">
         <div class="container">
-            <div class="content-section">
-                <div class="content-text">
-                    <h2 class="sp-title">Zekioğulları İnşaat</h2>
-                    <p>Zekioğulları İnşaat, Kocaeli'nin önde gelen inşaat firmalarından biri olarak, estetik ve güvenilir inşaat hizmetleri sunmaktadır. 20 yılı aşkın süredir, uzman ekibimiz ve yenilikçi yaklaşımımızla müşterilerimizin hayallerini gerçeğe dönüştürüyoruz.</p>
-                    <p>Her projede kaliteyi ve müşteri memnuniyetini ön planda tutarak, detaylara verdiğimiz önemle fark yaratıyoruz. Yenilikçi çözümlerimiz ve estetik anlayışımızla sektörde öncü bir konumdayız.</p>
-                </div>
-                <div class="content-image">
-                    <img src="img/138180 (1).jpg" alt="Hakkımızda">
-                </div>
+            <div class="content-text">
+                <h2>Biz Kimiz?</h2>
+                <p>Zekioğulları İnşaat, Kocaeli'nin önde gelen firmalarından biri olarak 20 yılı aşkın süredir estetik ve güvenilir inşaat hizmetleri sunmaktadır. Uzman ekibimiz ve yenilikçi yaklaşımımızla müşteri memnuniyetini ön planda tutarak, her projede kalite ve detaylara önem veriyoruz. Yenilikçi çözümlerimizle sektörde öncü konumdayız.</p>
             </div>
-            <div class="content-section">
-                <div class="content-text">
-                    <h2 class="sp-title">Misyonumuz</h2>
-                    <p>Zekioğulları İnşaat olarak misyonumuz, müşterilerimizin beklentilerini aşan projeler geliştirmek ve inşaat sektöründe yenilikçi çözümler sunmaktır. Güvenilirlik, kalite ve estetik değerlerimize bağlı kalarak, her projede sürdürülebilir ve işlevsel yaşam alanları oluşturmayı hedefliyoruz.</p>
-                </div>
-                <div class="content-image">
-                    <img src="img/138180 (1).jpg" alt="Misyonumuz">
-                </div>
-            </div>
-            <div class="content-section">
-                <div class="content-text">
-                    <h2 class="sp-title">Vizyonumuz</h2>
-                    <p>Vizyonumuz, inşaat sektöründe yenilikçi ve sürdürülebilir projelerle öncü bir firma olmaktır. Müşterilerimizin hayallerini gerçeğe dönüştürmek için sürekli olarak kendimizi geliştiriyor ve sektördeki en iyi uygulamaları takip ediyoruz.</p>
-                </div>
-                <div class="content-image">
-                    <img src="img/138180 (1).jpg" alt="Vizyonumuz">
-                </div>
-            </div>
-        </div>
-    </section
-    <!-- About section end -->
-
-    <!-- Team section start -->
-    <section class="team-section spad pt100 pb50">
-        <div class="container">
-            <div class="section-title">
-                <h2>Ekibimiz</h2>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="team-member">
-                        <div class="member-pic">
-                            <img src="img/team/1.jpg" alt="Ahmet Zeki">
-                        </div>
-                        <div class="member-info">
-                            <h5>Ahmet Zeki</h5>
-                            <span>CEO & Kurucu</span>
-                            <p>Ahmet Zeki, inşaat sektöründe 25 yılı aşkın deneyimiyle şirketimizin kurucusudur. Liderlik yetenekleri ve yenilikçi bakış açısıyla Zekioğulları İnşaat'ı başarıya taşımaktadır.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="team-member">
-                        <div class="member-pic">
-                            <img src="img/team/2.jpg" alt="Ayşe Kaya">
-                        </div>
-                        <div class="member-info">
-                            <h5>Ayşe Kaya</h5>
-                            <span>Proje Yöneticisi</span>
-                            <p>Ayşe Kaya, projelerin planlanması ve yönetiminde uzmanlaşmıştır. Detaylara verdiği önem ve müşteri odaklı yaklaşımıyla projelerimizin başarıyla tamamlanmasını sağlar.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="team-member">
-                        <div class="member-pic">
-                            <img src="img/team/3.jpg" alt="Mehmet Yılmaz">
-                        </div>
-                        <div class="member-info">
-                            <h5>Mehmet Yılmaz</h5>
-                            <span>Baş Mimar</span>
-                            <p>Mehmet Yılmaz, yaratıcı ve estetik tasarımlarıyla tanınan bir baş mimardır. Mimariye kattığı değer ve yenilikçi fikirleriyle projelerimizin kalitesini artırır.</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="content-image">
+                <img src="img/altinvadi/4.jpg" alt="Zekioğulları İnşaat">
             </div>
         </div>
     </section>
-    <!-- Team section end -->
+
+    <section class="content-section">
+        <div class="container">
+            <div class="content-text">
+                <h2>Misyonumuz</h2>
+                <p>Zekioğulları İnşaat olarak misyonumuz, müşterilerimizin beklentilerini aşan projeler geliştirmek ve inşaat sektöründe yenilikçi çözümler sunmaktır. Güvenilirlik, kalite ve estetik değerlerimize bağlı kalarak, her projede sürdürülebilir ve işlevsel yaşam alanları oluşturmayı hedefliyoruz.</p>
+            </div>
+            <div class="content-image">
+                <img src="img/bahcem-bahcecik/12.webp" alt="Misyonumuz">
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <div class="content-text">
+                <h2>Vizyonumuz</h2>
+                <p>Vizyonumuz, inşaat sektöründe yenilikçi ve sürdürülebilir projelerle öncü bir firma olmaktır. Müşterilerimizin hayallerini gerçeğe dönüştürmek için sürekli olarak kendimizi geliştiriyor ve sektördeki en iyi uygulamaları takip ediyoruz.</p>
+            </div>
+            <div class="content-image">
+                <img src="img/mahal2.jpg" alt="Vizyonumuz">
+            </div>
+        </div>
+    </section>
+    <!-- About section end -->
 
     <!-- Footer section start -->
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-content">
-                <p>&copy; 2024 Tüm Hakları Saklıdır. <br><a href="#">Zekioğulları İnşaat</a></p>
+                <p>&copy; 2024 Tüm Hakları Saklıdır. <br /><a href="">Zekioğulları İnşaat</a></p>
                 <div class="social-icons">
-                    <a href="#"><i class="fa fa-facebook-f"></i></a>
-                    <a href="#"><i class="fa fa-instagram"></i></a>
-                    <a href="#"><i class="fa fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
                 </div>
             </div>
         </div>
+        <a href="https://wa.me/900000000000" class="whatsapp-float" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+        </a>
     </footer>
     <!-- Footer section end -->
 
