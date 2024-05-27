@@ -202,6 +202,23 @@
     <!-- Footer section end -->
 
     <!-- Javascripts & Jquery -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          const menuIcon = document.querySelector('.nav-switch');
+          const navMenu = document.querySelector('.nav-menu');
+      
+          menuIcon.addEventListener('click', function (e) {
+              e.preventDefault();
+              navMenu.style.display = (navMenu.style.display === 'block' ? 'none' : 'block');
+          });
+      
+          document.addEventListener('click', function (e) {
+              if (!navMenu.contains(e.target) && !menuIcon.contains(e.target)) {
+                  navMenu.style.display = 'none';
+              }
+          });
+      });
+      </script>
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.slicknav.min.js"></script>

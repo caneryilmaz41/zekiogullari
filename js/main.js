@@ -29,8 +29,8 @@ $(window).on('load', function() {
 	/*------------------
 		Navigation
 	--------------------*/
-	$('.nav-switch').on('click', function(event) {
-		$('.nav-menu').slideToggle(400);
+	$('.nav-switcwqh').on('click', function(event) {
+		$('.nav-mwqnu').slideToggle(400);
 		event.preventDefault();
 	});
 

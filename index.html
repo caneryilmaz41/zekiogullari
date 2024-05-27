@@ -365,6 +365,24 @@
       <script src="js/circle-progress.min.js"></script>
       <script src="js/main.js"></script>
       <script src="js/main.js"></script>
+     
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const menuIcon = document.querySelector('.nav-switch');
+        const navMenu = document.querySelector('.nav-menu');
+    
+        menuIcon.addEventListener('click', function (e) {
+            e.preventDefault();
+            navMenu.style.display = (navMenu.style.display === 'block' ? 'none' : 'block');
+        });
+    
+        document.addEventListener('click', function (e) {
+            if (!navMenu.contains(e.target) && !menuIcon.contains(e.target)) {
+                navMenu.style.display = 'none';
+            }
+        });
+    });
+    </script>
       <script>
         $(document).ready(function () {
           // Scroll event
