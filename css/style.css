@@ -15,7 +15,7 @@
 html,
 body {
 	height: 100%;
-	font-family: "Poppins";
+	font-family: "Montserrat",sans-serif;
 }
 .scroll-to-top {
     position: fixed;
@@ -955,7 +955,7 @@ display: inline-flex;
 	width: 50%;
 	height: 100%;
 	left: 0;
-	background-image: url("../img/cta.png");
+	background-image: url("../img/batch_cta.webp");
 	background-repeat: no-repeat;
 	background-size: cover;
 }

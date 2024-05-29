@@ -29,12 +29,17 @@ $(window).on('load', function() {
 	/*------------------
 		Navigation
 	--------------------*/
-	$('.nav-switcwqh').on('click', function(event) {
-		$('.nav-mwqnu').slideToggle(400);
-		event.preventDefault();
-	});
+	var menuAcik = false;
 
-
+$('.nav-switch').on('click', function(event) {
+    if (menuAcik) {
+        $('.nav-menu').fadeOut(400);
+    } else {
+        $('.nav-menu').fadeIn(400);
+    }
+    menuAcik = !menuAcik; // Menünün durumunu tersine çevir
+    event.preventDefault();
+});
 
 	/*------------------
 		Background set
